@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bety & Luis — Nuestra boda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F4F0E6;
+    --ivory-2:#EFE9DA;
+    --white-warm:#FFFDF8;
+    --teal:#355C58;
+    --teal-deep:#2A4B48;
+    --teal-soft:#5C8A85;
+    --ink:#3E3A33;
+    --gold:#B99B62;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    background:var(--ivory-2);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    max-width:520px;
+    margin:0 auto;
+    padding:28px 14px 60px;
+  }
+  .card{
+    position:relative;
+    background:var(--ivory);
+    padding:42px 28px 50px;
+    overflow:hidden;
+  }
+  .frame{
+    position:absolute;
+    inset:16px;
+    pointer-events:none;
+    z-index:1;
+  }
+  .frame svg{width:100%;height:100%;display:block;}
+  .content{position:relative;z-index:2;}
+
+  .eyebrow{
+    text-align:center;
+    font-weight:300;
+    font-size:1rem;
+    letter-spacing:0.22em;
+    color:var(--teal);
+    margin:8px 0 4px;
+  }
+  h1.names{
+    font-family:'Alex Brush',cursive;
+    text-align:center;
+    font-size:clamp(3.2rem,15vw,4.6rem);
+    line-height:1;
+    color:var(--teal-deep);
+    margin:6px 0 2px;
+    font-weight:400;
+  }
+  .amp{
+    display:block;
+    font-family:'Alex Brush',cursive;
+    font-size:2rem;
+    color:var(--gold);
+    margin:-4px 0 1.5px;
+  }
+  .hero-image {
+  width: min(80vw, 300px);
+  aspect-ratio: 1 / 1;
+  margin: 20px auto 24px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+  .ornament{
+    display:flex;
+    justify-content:center;
+    margin:14px 0;
+    color:var(--teal-soft);
+  }
+  .ornament svg{width:64px;height:auto;}
+
+  section.block{
+    text-align:center;
+    padding:22px 4px;
+  }
+  section.block .icon{
+    margin:0 auto 10px;
+    width:54px;
+    color:var(--teal);
+  }
+  section.block .icon svg{width:100%;height:auto;display:block;}
+  .label{
+    font-family:'Alex Brush',cursive;
+    font-size:2rem;
+    color:var(--teal-deep);
+    margin:0 0 6px;
+  }
+  .place{
+    font-size:1.05rem;
+    font-weight:500;
+    letter-spacing:0.02em;
+    margin:0 0 4px;
+  }
+  .time{
+    font-size:0.92rem;
+    font-weight:300;
+    letter-spacing:0.14em;
+    color:var(--teal-soft);
+  }
+  .date-block{
+    text-align:center;
+    padding:6px 0 20px;
+  }
+  .date-line{
+    font-size:1.35rem;
+    font-weight:400;
+    letter-spacing:0.04em;
+    color:var(--ink);
+  }
+  .date-sub{
+    font-size:0.75rem;
+    letter-spacing:0.2em;
+    color:var(--teal-soft);
+    font-weight:300;
+    margin-top:4px;
+  }
+
+  /* Countdown */
+  .countdown{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:10px;
+    margin:18px auto 4px;
+    max-width:320px;
+  }
+  .cd-block{
+    background:var(--teal-deep);
+    color:var(--ivory);
+    border-radius:6px;
+    padding:12px 10px 10px;
+    min-width:68px;
+    flex:1;
+    text-align:center;
+  }
+  .cd-num{
+    display:block;
+    font-family:'Jost',sans-serif;
+    font-weight:600;
+    font-size:1.7rem;
+    letter-spacing:0.02em;
+    line-height:1;
+  }
+  .cd-label{
+    display:block;
+    margin-top:6px;
+    font-size:0.6rem;
+    letter-spacing:0.16em;
+    font-weight:400;
+    color:var(--gold);
+  }
+  .cd-done{
+    text-align:center;
+    font-family:'Alex Brush',cursive;
+    font-size:1.6rem;
+    color:var(--teal-deep);
+    margin:18px 0 4px;
+  }
+
+  .btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:12px 30px;
+    border:1.4px solid var(--teal);
+    border-radius:2px;
+    color:var(--teal-deep);
+    text-decoration:none;
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+    font-weight:500;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn:hover{background:var(--teal);color:var(--ivory);}
+  .btn.primary{
+    background:var(--teal-deep);
+    color:var(--ivory);
+    border-color:var(--teal-deep);
+  }
+  .btn.primary:hover{background:var(--teal);}
+
+  .btn-map{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:10px;
+    padding:7px 16px;
+    border:1px solid var(--teal-soft);
+    border-radius:20px;
+    color:var(--teal-deep);
+    text-decoration:none;
+    font-size:0.72rem;
+    letter-spacing:0.07em;
+    font-weight:500;
+    background:transparent;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn-map svg{width:13px;height:13px;flex-shrink:0;}
+  .btn-map:hover{background:var(--teal-soft);color:var(--white-warm);}
+
+  .editable-note{
+    display:block;
+    margin-top:8px;
+    font-size:0.68rem;
+    letter-spacing:0.05em;
+    color:#a99a76;
+    font-style:italic;
+  }
+  .dress-text{
+    max-width:280px;
+    margin:0 auto;
+    font-size:0.92rem;
+    line-height:1.6;
+    font-weight:300;
+    color:var(--ink);
+  }
+
+  /* White event cards */
+  .event-card{
+    background:var(--white-warm);
+    border:1px solid rgba(53,92,88,0.15);
+    border-radius:12px;
+    padding:26px 20px 22px;
+    margin:0 2px;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:var(--teal-soft);
+    opacity:.7;
+  }
+  .divider svg{width:22px;height:auto;}
+  .divider .line{
+    height:1px;
+    width:60px;
+    background:var(--teal-soft);
+    opacity:.5;
+  }
+
+  footer.sign{
+    text-align:center;
+    margin-top:8px;
+    font-family:'Alex Brush',cursive;
+    font-size:1.4rem;
+    color:var(--gold);
+  }
+
+  /* Closing emblem */
+  .emblem{
+    position:relative;
+    width:72px;
+    height:72px;
+    margin:26px auto 4px;
+  }
+  .emblem svg{width:100%;height:100%;display:block;}
+  .emblem-text{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Alex Brush',cursive;
+    font-size:1.5rem;
+    color:var(--teal-deep);
+  }
+
+  /* Sound control */
+  .sound-btn{
+    position:fixed;
+    right:calc(16px + env(safe-area-inset-right,0px));
+    bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid rgba(53,92,88,0.3);
+    background:rgba(255,253,248,0.88);
+    backdrop-filter:blur(4px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--teal-deep);
+    cursor:pointer;
+    z-index:50;
+    transition:background .25s ease, transform .15s ease;
+  }
+  .sound-btn:hover{background:var(--white-warm);}
+  .sound-btn:active{transform:scale(0.94);}
+  .sound-btn svg{width:19px;height:19px;}
+  .sound-btn svg + svg{display:none;}
+  .sound-btn.playing svg:first-child{display:none;}
+  .sound-btn.playing svg:last-child{display:block;}
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      /* Invitation keeps its ivory paper look regardless of system theme */
+    }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="card">
+    <div class="frame" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="1" width="96" height="99" fill="none" stroke="#355C58" stroke-width="0.35"/>
+      </svg>
+    </div>
+
+    <div class="content">
+      <!-- A. Portada -->
+      <p class="eyebrow">NUESTRA BODA</p>
+      <h1 class="names">Bety<span class="amp">&amp;</span>Luis</h1>
+      <!-- Imagen principal -->
+      <div class="hero-image">
+        <img 
+          src="src/assets/ByL.png" 
+          alt="Bety y Luis"
+        >
+      </div>
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path d="M10,20 C10,20 25,4 40,16 C48,22 40,30 32,26 C40,30 48,34 60,20 C72,34 80,30 88,26 C80,30 72,22 80,16 C95,4 110,20 110,20"/>
+          <path d="M60,20 C58,10 56,6 60,4 C64,6 62,10 60,20 Z" transform="translate(0,-2)"/>
+        </svg>
+      </div>
+
+      <!-- B. Fecha -->
+      <div class="date-block">
+        <div class="date-line">Sábado 07 de noviembre</div>
+        <div class="date-sub">RESERVA LA FECHA</div>
+
+        <!-- Cuenta regresiva: apunta al 07 de noviembre de 2026, 1:00 pm hora de San Luis Potosí (UTC-06:00) -->
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="cd-block"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Días</span></div>
+          <div class="cd-block"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Horas</span></div>
+          <div class="cd-block"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Minutos</span></div>
+        </div>
+        <p class="cd-done" id="cd-done" hidden>¡Hoy es el gran día!</p>
+      </div>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3 5 6.4 5 9 5 11 7 12 8.6 13 7 15 5 17.6 5 21 5 23 8.4 21.3 12 19 16.4 12 21 12 21Z"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- C. Ceremonia -->
+      <section class="block">
+        <div class="event-card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 6 L30 14 M26 10 L34 10"/>
+              <path d="M18 54 L18 30 L30 16 L42 30 L42 54 Z"/>
+              <path d="M26 54 L26 40 Q30 34 34 40 L34 54"/>
+              <path d="M14 54 L46 54"/>
+            </svg>
+          </div>
+          <p class="label">Ceremonia Religiosa</p>
+          <p class="place">Parroquia San Pablo y Santa María de Guadalupe</p>
+          <p class="time">01:00 PM</p>
+          <!-- Enlace de búsqueda de Google Maps basado en el nombre del recinto -->
+          <a class="btn-map" href="https://maps.app.goo.gl/Gvp2xnUwGavmN6d37" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            Cómo llegar
+          </a>
+        </div>
+      </section>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="16" r="5"/><circle cx="16" cy="16" r="5"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- D. Recepción -->
+<section class="block">
+  <div class="event-card">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 20 Q30 8 40 20 L36 40 Q30 45 24 40 Z"/>
+        <path d="M30 45 L30 54"/>
+        <path d="M22 54 L38 54"/>
+        <path d="M20 20 Q30 26 40 20"/>
+      </svg>
+    </div>
+    <p class="label">Recepción</p>
+    <p class="place">Salón jardín El Rosal</p>
+    <p class="time">05:00 PM</p>
+
+    <!-- Enlace de búsqueda de Google Maps basado en el nombre del recinto -->
+    <a class="btn-map" href="https://maps.app.goo.gl/XmJJBTHhPU6DpUpV9" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/>
+        <circle cx="12" cy="10" r="2.4"/>
+      </svg>
+      Cómo llegar
+    </a>
+  </div>
+</section>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M12 3c3 3 5 5 5 8a5 5 0 0 1-10 0c0-3 2-5 5-8Z"/><path d="M12 21v-7"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- E. Mesa de regalos -->
+<section class="block">
+  <div class="event-card">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 24 H48 V52 H12 Z"/>
+        <path d="M10 18 H50 V25 H10 Z"/>
+        <path d="M30 18 V52"/>
+        <path d="M30 18 C25 18 18 16 18 11 C18 7 22 6 25 8 C29 10 30 18 30 18 Z"/>
+        <path d="M30 18 C35 18 42 16 42 11 C42 7 38 6 35 8 C31 10 30 18 30 18 Z"/>
+      </svg>
+    </div>
+
+    <p class="label">Mesa de regalos</p>
+    <p class="dress-text">
+      Tu presencia es nuestro mejor regalo. Si deseas obsequiarnos algo, con gusto puedes visitar nuestra mesa de regalos.
+    </p>
+
+    <!-- EDITABLE: reemplazar href con el enlace real de la mesa de regalos -->
+    <a class="btn" href="https://www.amazon.com.mx/wedding/guest-view/365UV42QQ23Y6" id="gift-link">
+      Ver mesa de regalos
+    </a>
+  </div>
+</section>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 L18 6 M9 6h9v9"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- F. Código de vestimenta -->
+<section class="block">
+  <div class="event-card">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10 L30 18 L40 10 L48 20 L40 28 L37 24 L37 52 H23 V24 L20 28 L12 20 Z"/>
+        <path d="M20 10 Q24 17 30 18 Q36 17 40 10"/>
+      </svg>
+    </div>
+
+    <p class="label">Código de vestimenta</p>
+
+    <!-- EDITABLE: sustituir por la descripción real del código de vestimenta -->
+    <p class="dress-text" id="dress-code">
+      Formal/Etiqueta
+    </p>
+
+    <span class="editable-note">
+     Queremos que disfrutes y celebres con nosotros, por eso te invitamos a vestir de acuerdo con el código de vestimenta de nuestro gran día.
+    </span>
+  </div>
+</section>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3 5 6.4 5 9 5 11 7 12 8.6 13 7 15 5 17.6 5 21 5 23 8.4 21.3 12 19 16.4 12 21 12 21Z"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- G. Confirmación de asistencia -->
+      <section class="block">
+        <p class="label">Confirmar asistencia</p>
+        <p class="dress-text">Nos encantaría contar contigo. Por favor confírmanos antes del 25 de octubre.</p>
+        <!-- EDITABLE: reemplazar href con el enlace real de WhatsApp o formulario -->
+        <a class="btn primary" href="https://wa.me/524444399926?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20boda.%20%F0%9F%A5%82%20Nos%20vemos%20en%20su%20gran%20d%C3%ADa.%20%C2%A1Estoy%20muy%20feliz%20de%20acompa%C3%B1arlos!%20%F0%9F%A4%8D" id="rsvp-link">Confirmar asistencia</a>
+      </section>
+
+      <footer class="sign">Con amor, Bety &amp; Luis</footer>
+
+      <!-- Emblema de cierre -->
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#2A4B48" stroke-width="1"/>
+        </svg>
+        <span class="emblem-text">B &amp; L</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Música de fondo: reemplaza la ruta del <source> por el archivo de música elegido -->
+<audio id="bgm" loop preload="none">
+  <source src="src/assets/Fonseca - Que Suerte Tenerte (Audio) (1).mp3" type="audio/mpeg">
+</audio>
+<button class="sound-btn" id="sound-btn" type="button" aria-label="Activar música de fondo" aria-pressed="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9v6h4l5 4V5L9 9H5Z"/><path d="M18 9a5 5 0 0 1 0 6" opacity="0"/><line x1="16" y1="8" x2="21" y2="16"/><line x1="21" y1="8" x2="16" y2="16"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9v6h4l5 4V5L9 9H5Z"/><path d="M17 8a5.5 5.5 0 0 1 0 8"/><path d="M19.5 6a9 9 0 0 1 0 12"/></svg>
+</button>
+
+<script>
+(function(){
+  // --- Cuenta regresiva ---
+  // Objetivo: 7 de noviembre de 2026, 1:00 pm hora de San Luis Potosí, México (UTC-06:00, sin horario de verano).
+  var targetDate = new Date('2026-11-07T13:00:00-06:00');
+  var daysEl = document.getElementById('cd-days');
+  var hoursEl = document.getElementById('cd-hours');
+  var minsEl = document.getElementById('cd-mins');
+  var countdownEl = document.getElementById('countdown');
+  var doneEl = document.getElementById('cd-done');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = targetDate.getTime() - now.getTime();
+    if (diff <= 0){
+      countdownEl.hidden = true;
+      doneEl.hidden = false;
+      return;
+    }
+    var totalMinutes = Math.floor(diff / 60000);
+    var days = Math.floor(totalMinutes / 1440);
+    var hours = Math.floor((totalMinutes % 1440) / 60);
+    var minutes = totalMinutes % 60;
+    daysEl.textContent = pad(days);
+    hoursEl.textContent = pad(hours);
+    minsEl.textContent = pad(minutes);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // --- Control de música de fondo ---
+  var audio = document.getElementById('bgm');
+  var soundBtn = document.getElementById('sound-btn');
+  var isPlaying = false;
+
+  soundBtn.addEventListener('click', function(){
+    if (!isPlaying){
+      var playPromise = audio.play();
+      if (playPromise !== undefined){
+        playPromise.then(function(){
+          isPlaying = true;
+          soundBtn.classList.add('playing');
+          soundBtn.setAttribute('aria-pressed','true');
+          soundBtn.setAttribute('aria-label','Silenciar música de fondo');
+        }).catch(function(){
+          // El navegador bloqueó la reproducción automática; el usuario deberá volver a intentar.
+          isPlaying = false;
+        });
+      }
+    } else {
+      audio.pause();
+      isPlaying = false;
+      soundBtn.classList.remove('playing');
+      soundBtn.setAttribute('aria-pressed','false');
+      soundBtn.setAttribute('aria-label','Activar música de fondo');
+    }
+  });
+})();
+</script>
+</body>
+</html>
