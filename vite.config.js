@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: './'
+  base: 'https://boda-bety-y-luis.netlify.app/'
 })
